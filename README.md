@@ -1,49 +1,70 @@
-🚀 Employee Attrition Prediction Backend (FastAPI + ML)
+🚀 Employee Attrition Prediction Backend
+
+FastAPI · Machine Learning · REST API
+
 📌 Project Overview
 
-This project is a machine learning–powered backend service for predicting employee attrition using Logistic Regression and Decision Tree models.
+This project is a machine learning–powered backend service designed to predict employee attrition using supervised learning techniques.
 
-The backend is built with FastAPI and exposes REST APIs that allow a frontend application to submit employee details and receive attrition predictions in real time.
+The backend is built with FastAPI and exposes RESTful APIs that allow a frontend application to submit employee information and receive real-time attrition predictions using trained machine learning models.
 
-This project fulfills the requirements of an end-to-end ML pipeline, including:
+The system implements a complete end-to-end machine learning pipeline, from data preprocessing and model training to deployment as a production-ready API.
 
-Data preprocessing
+🎯 Project Objectives
 
-Model training & evaluation
+Build and evaluate Logistic Regression and Decision Tree models
 
-Model serialization using joblib
+Export trained models using joblib
 
-API integration
+Integrate models into a FastAPI backend
 
-Deployment-ready backend
+Expose prediction endpoints via REST APIs
+
+Deploy the backend for public access
+
+Provide interactive API documentation using Swagger UI
 
 🧠 Machine Learning Models
 
-The following models are used:
+The following models are implemented:
 
-Logistic Regression
+1️⃣ Logistic Regression
 
-Decision Tree Classifier
+Used for baseline and interpretable predictions
 
-Both models were trained using a cleaned and preprocessed employee dataset, including:
+Provides probability estimates for attrition
 
-Missing value handling
+2️⃣ Decision Tree Classifier
 
-Feature encoding
+Captures non-linear patterns in employee behavior
 
-Feature scaling
+Used for comparative performance analysis
 
-Model evaluation
+🧪 Data Preprocessing & Training
 
-The trained models are exported using joblib and loaded dynamically by the API.
+The models were trained on a cleaned and preprocessed employee dataset with the following steps:
 
-🏗️ Project Structure
+Handling missing values
+
+Encoding categorical features
+
+Scaling numerical features
+
+Model training and evaluation
+
+Model comparison
+
+Model serialization using joblib
+
+The full training pipeline was implemented and executed in a Google Colab notebook.
+
+🗂️ Project Structure
 employee-attrition-backend/
 │
 ├── app/
-│   ├── api.py              # FastAPI routes
-│   ├── predict.py          # Prediction logic
-│   ├── schemas.py          # Request/response schemas
+│   ├── api.py              # FastAPI route definitions
+│   ├── predict.py          # Model loading & prediction logic
+│   ├── schemas.py          # Pydantic request/response schemas
 │   └── __init__.py
 │
 ├── models/
@@ -52,45 +73,59 @@ employee-attrition-backend/
 │
 ├── requirements.txt
 ├── README.md
-⚙️ Tech Stack
 
-Backend Framework: FastAPI
+⚙️ Technology Stack
+Backend
 
-ML Libraries: scikit-learn, pandas, numpy
+FastAPI
 
-Model Persistence: joblib
+Uvicorn
 
-API Server: Uvicorn
+Machine Learning
 
-Deployment: Render
+scikit-learn
+
+pandas
+
+numpy
+
+Model Persistence
+
+joblib
+
+Deployment
+
+Render
 
 🔌 API Endpoints
 🔹 Logistic Regression Prediction
 
 POST
+
 /predict/logistic
 
 🔹 Decision Tree Prediction
 
 POST
+
 /predict/decision-tree
 
-🔹 API Documentation (Swagger)
+🔹 Interactive API Documentation (Swagger)
 /docs
 
 ▶️ Running the Project Locally
-1️⃣ Clone the repository
+1️⃣ Clone the Repository
 git clone https://github.com/YOUR_USERNAME/employee-attrition-backend.git
 cd employee-attrition-backend
 
-2️⃣ Create & activate virtual environment
+2️⃣ Create & Activate Virtual Environment
 python -m venv venv
 source venv/Scripts/activate   # Windows (Git Bash)
 
-3️⃣ Install dependencies
+3️⃣ Install Dependencies
 pip install -r requirements.txt
 
-4️⃣ Start the server
+4️⃣ Start the FastAPI Server
 uvicorn app.api:app --reload
 
 5️⃣ Open Swagger UI
@@ -98,36 +133,24 @@ http://127.0.0.1:8000/docs
 
 🌐 Deployment
 
-The backend is deployed using Render.
+The backend is deployed using Render, making the API publicly accessible.
 
-🔗 Live API Docs:
+🔗 Live API Documentation:
 
 https://your-backend.onrender.com/docs
 
-🧪 Model Training
+📊 Assignment Requirements Coverage
 
-The models were trained in a Google Colab notebook, which includes:
-
-Data cleaning
-
-Feature engineering
-
-Model training
-
-Evaluation
-
-Exporting models with joblib
-
-The trained models are stored in the models/ directory and loaded during runtime.
-
-✔ End-to-end ML pipeline
-✔ Logistic Regression & Decision Tree
+✔ Complete end-to-end ML pipeline
+✔ Logistic Regression & Decision Tree implementation
+✔ Model evaluation and comparison
 ✔ Model persistence using joblib
 ✔ FastAPI backend integration
+✔ RESTful prediction endpoints
 ✔ Swagger documentation
 ✔ Deployment-ready backend
 
 👤 Author
 
-Alpha Israel 
+Alpha Israel (Alphicho)
 Machine Learning & Software Engineering Student
