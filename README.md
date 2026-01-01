@@ -59,7 +59,7 @@ Model serialization using joblib
 The full training pipeline was implemented and executed in a Google Colab notebook.
 
 🗂️ Project Structure
-employee-attrition-backend/
+### employee-attrition-backend/
 │
 ├── app/
 │   ├── api.py              # FastAPI route definitions
@@ -72,7 +72,8 @@ employee-attrition-backend/
 │   └── decision_tree_model.joblib
 │
 ├── requirements.txt
-├── README.md
+├── README.md 
+###
 
 ⚙️ Technology Stack
 Backend
@@ -154,3 +155,4 @@ https://your-backend.onrender.com/docs
 
 Alpha Israel (Alphicho)
 Machine Learning & Software Engineering Student
+
