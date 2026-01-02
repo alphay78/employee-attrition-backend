@@ -23,18 +23,15 @@ def get_decision_tree_model():
 # =========================
 
 def _build_dataframe(data: EmployeeFeatures) -> pd.DataFrame:
-    """
-    Convert request schema to pandas DataFrame
-    """
     return pd.DataFrame([{
-        "Age": data.Age,
-        "MonthlyIncome": data.MonthlyIncome,
-        "JobLevel": data.JobLevel,
-        "JobSatisfaction": data.JobSatisfaction,
-        "YearsAtCompany": data.YearsAtCompany,
-        "OverTime": data.OverTime,
-        "Department": data.Department,
-        "EducationField": data.EducationField,
+        "Age": data.age,
+        "MonthlyIncome": data.monthly_income,
+        "JobLevel": data.job_level,
+        "JobSatisfaction": data.job_satisfaction,
+        "YearsAtCompany": data.years_at_company,
+        "OverTime": data.overtime,
+        "Department": data.department,
+        "EducationField": data.education_field,
     }])
 
 

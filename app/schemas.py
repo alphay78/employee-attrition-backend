@@ -1,11 +1,11 @@
 from pydantic import BaseModel
 
 class EmployeeFeatures(BaseModel):
-    Age: int
-    MonthlyIncome: float
-    JobLevel: int
-    JobSatisfaction: int
-    YearsAtCompany: int
-    OverTime: str           # "Yes" / "No"
-    Department: str
-    EducationField: str
+    age: int
+    monthly_income: float
+    job_level: int
+    job_satisfaction: int
+    years_at_company: int
+    overtime: str
+    department: str
+    education_field: str
