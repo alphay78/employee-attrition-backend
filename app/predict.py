@@ -2,6 +2,7 @@ from app.schemas import EmployeeFeatures
 import joblib
 import pandas as pd
 from functools import lru_cache
+from fastapi import HTTPException
 
 
 # =========================
@@ -10,12 +11,18 @@ from functools import lru_cache
 
 @lru_cache()
 def get_logistic_model():
-    return joblib.load("models/logistic_model.joblib")
+    try:
+        return joblib.load("models/logistic_model.joblib")
+    except Exception as e:
+        raise RuntimeError(f"Failed to load logistic model: {e}")
 
 
 @lru_cache()
 def get_decision_tree_model():
-    return joblib.load("models/decision_tree_model.joblib")
+    try:
+        return joblib.load("models/decision_tree_model.joblib")
+    except Exception as e:
+        raise RuntimeError(f"Failed to load decision tree model: {e}")
 
 
 # =========================
@@ -23,6 +30,9 @@ def get_decision_tree_model():
 # =========================
 
 def _build_dataframe(data: EmployeeFeatures) -> pd.DataFrame:
+    """
+    Builds a single-row DataFrame matching the training feature set exactly.
+    """
     return pd.DataFrame([{
         "Age": data.age,
         "MonthlyIncome": data.monthly_income,
@@ -36,21 +46,38 @@ def _build_dataframe(data: EmployeeFeatures) -> pd.DataFrame:
 
 
 # =========================
+# Helpers
+# =========================
+
+def _format_response(prediction: int, probability: float, model_name: str):
+    return {
+        "attrition_prediction": prediction,
+        "attrition": "Yes" if prediction == 1 else "No",
+        "confidence": round(probability, 4),
+        "model_used": model_name
+    }
+
+
+# =========================
 # Logistic Regression
 # =========================
 
 def predict_logistic(data: EmployeeFeatures):
-    model = get_logistic_model()
-    df = _build_dataframe(data)
+    try:
+        model = get_logistic_model()
+        df = _build_dataframe(data)
 
-    prediction = int(model.predict(df)[0])
-    probability = float(model.predict_proba(df)[0][1])
+        prediction = int(model.predict(df)[0])
+        probability = float(model.predict_proba(df)[0][1])
 
-    return {
-        "attrition_prediction": prediction,
-        "probability": round(probability, 4),
-        "model_used": "logistic_regression"
-    }
+        return _format_response(
+            prediction,
+            probability,
+            "logistic_regression"
+        )
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 # =========================
@@ -58,14 +85,23 @@ def predict_logistic(data: EmployeeFeatures):
 # =========================
 
 def predict_decision_tree(data: EmployeeFeatures):
-    model = get_decision_tree_model()
-    df = _build_dataframe(data)
+    try:
+        model = get_decision_tree_model()
+        df = _build_dataframe(data)
 
-    prediction = int(model.predict(df)[0])
-    probability = float(model.predict_proba(df)[0][1])
+        prediction = int(model.predict(df)[0])
 
-    return {
-        "attrition_prediction": prediction,
-        "probability": round(probability, 4),
-        "model_used": "decision_tree"
-    }
+        # Decision trees may or may not support predict_proba
+        if hasattr(model, "predict_proba"):
+            probability = float(model.predict_proba(df)[0][1])
+        else:
+            probability = 0.0
+
+        return _format_response(
+            prediction,
+            probability,
+            "decision_tree"
+        )
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
