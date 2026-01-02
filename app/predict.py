@@ -50,6 +50,10 @@ def _build_dataframe(data: EmployeeFeatures) -> pd.DataFrame:
 # =========================
 
 def _format_response(prediction: int, probability: float, model_name: str):
+    # Ensure probability is always a valid float
+    if probability is None or not isinstance(probability, (float, int)):
+        probability = 0.0
+
     return {
         "attrition_prediction": prediction,
         "attrition": "Yes" if prediction == 1 else "No",
