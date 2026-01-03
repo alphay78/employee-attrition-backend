@@ -1,6 +1,6 @@
 🚀 Employee Attrition Prediction Backend
 
-FastAPI · Machine Learning · REST API
+FastAPI · Machine Learning 
 
 📌 Project Overview
 
@@ -155,4 +155,5 @@ https://your-backend.onrender.com/docs
 
 Alpha Israel (Alphicho)
 Machine Learning & Software Engineering Student
+
 
